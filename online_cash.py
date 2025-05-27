@@ -36,3 +36,30 @@ class OnlineSalesRegisterCollector:
         if self.__number_items > 10:
             total_sum *= 0.9
         return total_sum
+
+    def twenty_percent_tax_calculation(self):
+        twenty_percent_tax = [item for item in self.__name_items if self.__tax_rate[item] == 20]
+        total = [self.__item_price[item] for item in twenty_percent_tax]
+        total_sum = sum(total)
+        if self.__number_items > 10:
+            total_sum *= 0.9
+        return total_sum * 0.2
+
+    def ten_percent_tax_calculation(self):
+        ten_percent_tax = [item for item in self.__name_items if self.__tax_rate[item] == 10]
+        total = [self.__item_price[item] for item in ten_percent_tax]
+        total_sum = sum(total)
+        if self.__number_items > 10:
+            total_sum *= 0.9
+        return total_sum * 0.1
+
+    def total_tax(self):
+        return self.ten_percent_tax_calculation() + self.twenty_percent_tax_calculation()
+
+    @staticmethod
+    def get_telephone_number(telephone_number):
+        if not isinstance(telephone_number, int):
+            raise ValueError('Необходимо ввести цифры')
+        if len(str(telephone_number)) != 10:
+            raise ValueError('Необходимо ввести 10 цифр после "+7"')
+        return f'+7{telephone_number}'
